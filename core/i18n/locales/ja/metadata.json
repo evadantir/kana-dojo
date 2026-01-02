@@ -139,9 +139,53 @@
     "keywords": "kanji training, kanji practice, structured kanji learning"
   },
   "vocabularyTrain": {
-    "title": "Vocabulary Training - Practice Japanese Words",
-    "titleShort": "Vocabulary Training",
-    "description": "Train your Japanese vocabulary with structured practice sessions. Learn and retain new words effectively.",
-    "keywords": "vocabulary training, word practice, structured vocabulary learning"
+    "title": "語彙トレーニング - 日本語単語の練習",
+    "titleShort": "語彙トレーニング",
+    "description": "構造化された練習セッションで日本語の語彙を訓練します。新しい単語を効果的に学び、記憶します。",
+    "keywords": "語彙トレーニング, 単語練習, 構造化語彙学習, 日本語単語"
+  },
+  "kanaSubset": {
+    "hiraganaBase": {
+      "title": "ひらがな基本文字（あ-わ）- 基本ひらがなを学ぶ | KanaDojo",
+      "titleShort": "ひらがな基本文字",
+      "description": "46の基本ひらがな文字（あいうえお、かきくけこ、さしすせそなど）をマスターします。すべての基本的な日本語ひらがなのローマ字付き完全リファレンスガイド。",
+      "keywords": "ひらがな基本, 基本ひらがな, ひらがな表, あいうえお, ひらがなリファレンス, ひらがな基礎学習, 日本語ひらがな, ひらがなローマ字"
+    },
+    "hiraganaDakuon": {
+      "title": "ひらがな濁音（が-ぽ）- 濁音ひらがな文字 | KanaDojo",
+      "titleShort": "ひらがな濁音文字",
+      "description": "ひらがなの濁音・半濁音文字（がぎぐげご、ざじずぜぞ、だぢづでど、ばびぶべぼ、ぱぴぷぺぽ）を学びます。発音ガイド付きの25の濁音ひらがなをマスターします。",
+      "keywords": "ひらがな濁音, 濁音ひらがな, 濁点付きひらがな, がぎぐげご, ひらがな半濁音, ばびぶべぼ, ぱぴぷぺぽ, ひらがな濁音文字"
+    },
+    "hiraganaYoon": {
+      "title": "ひらがな拗音（きゃ-りょ）- 拗音ひらがな文字 | KanaDojo",
+      "titleShort": "ひらがな拗音文字",
+      "description": "ひらがなの拗音組み合わせ文字（きゃきゅきょ、しゃしゅしょ、ちゃちゅちょなど）をマスターします。ローマ字付きの33の拗音ひらがなを学びます。",
+      "keywords": "ひらがな拗音, 拗音ひらがな, ひらがな組み合わせ, きゃきゅきょ, しゃしゅしょ, ちゃちゅちょ, ひらがな二重音, 拗音"
+    },
+    "katakanaBase": {
+      "title": "カタカナ基本文字（ア-ワ）- 基本カタカナを学ぶ | KanaDojo",
+      "titleShort": "カタカナ基本文字",
+      "description": "46の基本カタカナ文字（アイウエオ、カキクケコ、サシスセソなど）をマスターします。すべての基本的な日本語カタカナのローマ字付き完全リファレンスガイド。",
+      "keywords": "カタカナ基本, 基本カタカナ, カタカナ表, アイウエオ, カタカナリファレンス, カタカナ基礎学習, 日本語カタカナ, カタカナローマ字"
+    },
+    "katakanaDakuon": {
+      "title": "カタカナ濁音（ガ-ポ）- 濁音カタカナ文字 | KanaDojo",
+      "titleShort": "カタカナ濁音文字",
+      "description": "カタカナの濁音・半濁音文字（ガギグゲゴ、ザジズゼゾ、ダヂヅデド、バビブベボ、パピプペポ）を学びます。発音ガイド付きの25の濁音カタカナをマスターします。",
+      "keywords": "カタカナ濁音, 濁音カタカナ, 濁点付きカタカナ, ガギグゲゴ, カタカナ半濁音, バビブベボ, パピプペポ, カタカナ濁音文字"
+    },
+    "katakanaYoon": {
+      "title": "カタカナ拗音（キャ-リョ）- 拗音カタカナ文字 | KanaDojo",
+      "titleShort": "カタカナ拗音文字",
+      "description": "カタカナの拗音組み合わせ文字（キャキュキョ、シャシュショ、チャチュチョなど）をマスターします。ローマ字付きの33の拗音カタカナを学びます。",
+      "keywords": "カタカナ拗音, 拗音カタカナ, カタカナ組み合わせ, キャキュキョ, シャシュショ, チャチュチョ, カタカナ二重音, 拗音カタカナ"
+    },
+    "katakanaForeign": {
+      "title": "カタカナ外来音（ファ-ウィ）- 拡張カタカナ | KanaDojo",
+      "titleShort": "カタカナ外来音",
+      "description": "外来語用の拡張カタカナ文字（ファ、フィ、ウィ、ウェなど）を学びます。現代日本語で使用される特殊なカタカナの組み合わせをマスターします。",
+      "keywords": "カタカナ外来音, 拡張カタカナ, 外来語カタカナ, ファフィ, ウィウェ, 特殊カタカナ, 現代カタカナ, 外来語用カタカナ"
+    }
   }
 }

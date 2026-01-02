@@ -139,9 +139,53 @@
     "keywords": "kanji training, kanji practice, structured kanji learning"
   },
   "vocabularyTrain": {
-    "title": "Vocabulary Training - Practice Japanese Words",
-    "titleShort": "Vocabulary Training",
-    "description": "Train your Japanese vocabulary with structured practice sessions. Learn and retain new words effectively.",
-    "keywords": "vocabulary training, word practice, structured vocabulary learning"
+    "title": "Entrenamiento de Vocabulario - Práctica de Palabras Japonesas",
+    "titleShort": "Entrenamiento de Vocabulario",
+    "description": "Entrena tu vocabulario japonés con sesiones de práctica estructuradas. Aprende y retén nuevas palabras de manera efectiva.",
+    "keywords": "entrenamiento vocabulario, práctica palabras, aprendizaje vocabulario estructurado, vocabulario japonés"
+  },
+  "kanaSubset": {
+    "hiraganaBase": {
+      "title": "Caracteres Hiragana Básicos (あ-わ) - Aprende Hiragana Básico | KanaDojo",
+      "titleShort": "Caracteres Hiragana Básicos",
+      "description": "Domina los 46 caracteres básicos de Hiragana (あいうえお, かきくけこ, さしすせそ, etc.). Guía de referencia completa con romanización para todo el hiragana fundamental japonés.",
+      "keywords": "hiragana básico, hiragana base, tabla hiragana, あいうえお, referencia hiragana, aprender hiragana básico, alfabeto japonés hiragana, romanización hiragana"
+    },
+    "hiraganaDakuon": {
+      "title": "Hiragana Dakuon (が-ぽ) - Caracteres Hiragana Sonoros | KanaDojo",
+      "titleShort": "Caracteres Hiragana Dakuon",
+      "description": "Aprende los caracteres sonoros Dakuon y Handakuon de Hiragana (がぎぐげご, ざじずぜぞ, だぢづでど, ばびぶべぼ, ぱぴぷぺぽ). Domina los 25 hiragana sonoros con guía de pronunciación.",
+      "keywords": "hiragana dakuon, hiragana sonoro, hiragana con dakuten, がぎぐげご, hiragana handakuon, ばびぶべぼ, ぱぴぷぺぽ, caracteres hiragana sonoros"
+    },
+    "hiraganaYoon": {
+      "title": "Hiragana Yoon (きゃ-りょ) - Caracteres Hiragana Combinados | KanaDojo",
+      "titleShort": "Caracteres Hiragana Yoon",
+      "description": "Domina los caracteres combinados Yoon de Hiragana (きゃきゅきょ, しゃしゅしょ, ちゃちゅちょ, etc.). Aprende los 33 sonidos combinados de hiragana con romanización.",
+      "keywords": "hiragana yoon, hiragana combinado, combinaciones hiragana, きゃきゅきょ, しゃしゅしょ, ちゃちゅちょ, dígrafos hiragana, yoon hiragana"
+    },
+    "katakanaBase": {
+      "title": "Caracteres Katakana Básicos (ア-ワ) - Aprende Katakana Básico | KanaDojo",
+      "titleShort": "Caracteres Katakana Básicos",
+      "description": "Domina los 46 caracteres básicos de Katakana (アイウエオ, カキクケコ, サシスセソ, etc.). Guía de referencia completa con romanización para todo el katakana fundamental japonés.",
+      "keywords": "katakana básico, katakana base, tabla katakana, アイウエオ, referencia katakana, aprender katakana básico, alfabeto japonés katakana, romanización katakana"
+    },
+    "katakanaDakuon": {
+      "title": "Katakana Dakuon (ガ-ポ) - Caracteres Katakana Sonoros | KanaDojo",
+      "titleShort": "Caracteres Katakana Dakuon",
+      "description": "Aprende los caracteres sonoros Dakuon y Handakuon de Katakana (ガギグゲゴ, ザジズゼゾ, ダヂヅデド, バビブベボ, パピプペポ). Domina los 25 katakana sonoros con guía de pronunciación.",
+      "keywords": "katakana dakuon, katakana sonoro, katakana con dakuten, ガギグゲゴ, katakana handakuon, バビブベボ, パピプペポ, caracteres katakana sonoros"
+    },
+    "katakanaYoon": {
+      "title": "Katakana Yoon (キャ-リョ) - Caracteres Katakana Combinados | KanaDojo",
+      "titleShort": "Caracteres Katakana Yoon",
+      "description": "Domina los caracteres combinados Yoon de Katakana (キャキュキョ, シャシュショ, チャチュチョ, etc.). Aprende los 33 sonidos combinados de katakana con romanización.",
+      "keywords": "katakana yoon, katakana combinado, combinaciones katakana, キャキュキョ, シャシュショ, チャチュチョ, dígrafos katakana, yoon katakana"
+    },
+    "katakanaForeign": {
+      "title": "Sonidos Extranjeros Katakana (ファ-ウィ) - Katakana Extendido | KanaDojo",
+      "titleShort": "Sonidos Extranjeros Katakana",
+      "description": "Aprende los caracteres extendidos de Katakana para préstamos extranjeros (ファ, フィ, ウィ, ウェ, etc.). Domina las combinaciones especiales de katakana usadas en japonés moderno.",
+      "keywords": "sonidos extranjeros katakana, katakana extendido, préstamos katakana, ファフィ, ウィウェ, katakana especial, katakana moderno, katakana palabras extranjeras"
+    }
   }
 }

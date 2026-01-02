@@ -54,14 +54,17 @@ export default {
       '/progress': 'weekly'
     };
 
-    // Check if this is an academy post URL (matches /academy/[slug] pattern)
-    const isAcademyPost =
-      /^\/academy\/[^/]+$/.test(path) ||
-      /^\/[a-z]{2}\/academy\/[^/]+$/.test(path);
+    // Extract base path without locale (e.g., /en/kana -> /kana)
+    const localePattern = /^\/(en|es|ja)(\/.*)?$/;
+    const match = path.match(localePattern);
+    const basePath = match ? (match[2] || '/') : path;
 
-    // Determine priority and changefreq
-    let priority = priorities[path] || config.priority;
-    let changefreq = changefreqs[path] || config.changefreq;
+    // Check if this is an academy post URL (matches /academy/[slug] pattern)
+    const isAcademyPost = /^\/academy\/[^/]+$/.test(basePath);
+
+    // Determine priority and changefreq using base path
+    let priority = priorities[basePath] || config.priority;
+    let changefreq = changefreqs[basePath] || config.changefreq;
 
     // Academy posts get priority 0.8 and weekly changefreq
     if (isAcademyPost) {
@@ -76,19 +79,19 @@ export default {
       lastmod: config.autoLastmod ? new Date().toISOString() : undefined,
       alternateRefs: [
         {
-          href: `https://kanadojo.com${path}`,
+          href: `https://kanadojo.com/en${basePath}`,
           hreflang: 'en'
         },
         {
-          href: `https://kanadojo.com${path}`,
+          href: `https://kanadojo.com/es${basePath}`,
           hreflang: 'es'
         },
         {
-          href: `https://kanadojo.com${path}`,
+          href: `https://kanadojo.com/ja${basePath}`,
           hreflang: 'ja'
         },
         {
-          href: `https://kanadojo.com${path}`,
+          href: `https://kanadojo.com/en${basePath}`,
           hreflang: 'x-default'
         }
       ]

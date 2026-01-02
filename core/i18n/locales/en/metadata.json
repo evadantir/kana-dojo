@@ -16,7 +16,7 @@
     "title": "Kana Blitz - Test Your Hiragana & Katakana Speed",
     "titleShort": "Kana Blitz - Test Your Speed",
     "description": "Test your Japanese kana recognition speed with Kana Blitz. Challenge yourself with timed exercises and track your progress.",
-    "keywords": "kana speed test, hiragana speed, katakana speed, japanese kana practice"
+    "keywords": "kana speed test, hiragana speed, katakana speed, japanese kana practice, kana flashcards, speed reading kana, timed kana quiz, rapid recall hiragana, fast katakana recognition, kana drill"
   },
   "kanaGauntlet": {
     "title": "Kana Gauntlet - Master Every Character",
@@ -34,7 +34,7 @@
     "title": "Kanji Blitz - Test Your Kanji Recognition Speed",
     "titleShort": "Kanji Blitz - Test Your Speed",
     "description": "Test your Japanese kanji recognition speed with Kanji Blitz. Fast-paced exercises to improve your kanji skills.",
-    "keywords": "kanji speed test, kanji recognition, fast kanji practice"
+    "keywords": "kanji speed test, kanji recognition, fast kanji practice, kanji flashcards, kanji drill, speed reading kanji, timed kanji quiz, rapid kanji recall, kanji speed reading, JLPT kanji practice"
   },
   "kanjiGauntlet": {
     "title": "Kanji Gauntlet - Master Every Character",
@@ -46,13 +46,13 @@
     "title": "Vocabulary Dojo - Learn Japanese Words & Vocabulary by JLPT Level",
     "titleShort": "Vocabulary Dojo - Learn Japanese Words",
     "description": "Expand your Japanese vocabulary with words organized by JLPT levels. Interactive exercises, example sentences, and progress tracking.",
-    "keywords": "japanese vocabulary, learn japanese words, JLPT vocabulary, vocabulary practice"
+    "keywords": "japanese vocabulary, learn japanese words, JLPT vocabulary, vocabulary practice, japanese word list, vocabulary flashcards, japanese phrases, JLPT word study, vocabulary by level, japanese vocabulary app"
   },
   "vocabularyBlitz": {
     "title": "Vocabulary Blitz - Test Your Japanese Vocabulary Speed",
     "titleShort": "Vocabulary Blitz - Test Your Speed",
     "description": "Test your Japanese vocabulary speed with Vocabulary Blitz. Fast-paced word recognition exercises.",
-    "keywords": "vocabulary speed test, japanese words, fast vocabulary practice"
+    "keywords": "vocabulary speed test, japanese words, fast vocabulary practice, vocabulary flashcards, word drill, speed reading japanese, timed vocabulary quiz, rapid word recall, JLPT vocabulary practice, japanese word recognition"
   },
   "vocabularyGauntlet": {
     "title": "Vocabulary Gauntlet - Master Every Word",
@@ -142,6 +142,50 @@
     "title": "Vocabulary Training - Practice Japanese Words",
     "titleShort": "Vocabulary Training",
     "description": "Train your Japanese vocabulary with structured practice sessions. Learn and retain new words effectively.",
-    "keywords": "vocabulary training, word practice, structured vocabulary learning"
+    "keywords": "vocabulary training, word practice, structured vocabulary learning, japanese vocabulary drills, word retention, spaced repetition vocabulary, vocabulary exercises, JLPT vocabulary training"
+  },
+  "kanaSubset": {
+    "hiraganaBase": {
+      "title": "Hiragana Base Characters (あ-わ) - Learn Basic Hiragana | KanaDojo",
+      "titleShort": "Hiragana Base Characters",
+      "description": "Master the 46 basic Hiragana characters (あいうえお, かきくけこ, さしすせそ, etc.). Complete reference guide with romanization for all fundamental Japanese hiragana.",
+      "keywords": "hiragana base, basic hiragana, hiragana chart, あいうえお, hiragana reference, learn hiragana basics, japanese alphabet hiragana, hiragana romanization"
+    },
+    "hiraganaDakuon": {
+      "title": "Hiragana Dakuon (が-ぽ) - Voiced Hiragana Characters | KanaDojo",
+      "titleShort": "Hiragana Dakuon Characters",
+      "description": "Learn Hiragana Dakuon and Handakuon voiced characters (がぎぐげご, ざじずぜぞ, だぢづでど, ばびぶべぼ, ぱぴぷぺぽ). Master all 25 voiced hiragana with pronunciation guide.",
+      "keywords": "hiragana dakuon, voiced hiragana, hiragana with dakuten, がぎぐげご, hiragana handakuon, ばびぶべぼ, ぱぴぷぺぽ, hiragana voiced characters"
+    },
+    "hiraganaYoon": {
+      "title": "Hiragana Yoon (きゃ-りょ) - Combined Hiragana Characters | KanaDojo",
+      "titleShort": "Hiragana Yoon Characters",
+      "description": "Master Hiragana Yoon combination characters (きゃきゅきょ, しゃしゅしょ, ちゃちゅちょ, etc.). Learn all 33 combined hiragana sounds with romanization.",
+      "keywords": "hiragana yoon, combined hiragana, hiragana combinations, きゃきゅきょ, しゃしゅしょ, ちゃちゅちょ, hiragana digraphs, yoon hiragana"
+    },
+    "katakanaBase": {
+      "title": "Katakana Base Characters (ア-ワ) - Learn Basic Katakana | KanaDojo",
+      "titleShort": "Katakana Base Characters",
+      "description": "Master the 46 basic Katakana characters (アイウエオ, カキクケコ, サシスセソ, etc.). Complete reference guide with romanization for all fundamental Japanese katakana.",
+      "keywords": "katakana base, basic katakana, katakana chart, アイウエオ, katakana reference, learn katakana basics, japanese alphabet katakana, katakana romanization"
+    },
+    "katakanaDakuon": {
+      "title": "Katakana Dakuon (ガ-ポ) - Voiced Katakana Characters | KanaDojo",
+      "titleShort": "Katakana Dakuon Characters",
+      "description": "Learn Katakana Dakuon and Handakuon voiced characters (ガギグゲゴ, ザジズゼゾ, ダヂヅデド, バビブベボ, パピプペポ). Master all 25 voiced katakana with pronunciation guide.",
+      "keywords": "katakana dakuon, voiced katakana, katakana with dakuten, ガギグゲゴ, katakana handakuon, バビブベボ, パピプペポ, katakana voiced characters"
+    },
+    "katakanaYoon": {
+      "title": "Katakana Yoon (キャ-リョ) - Combined Katakana Characters | KanaDojo",
+      "titleShort": "Katakana Yoon Characters",
+      "description": "Master Katakana Yoon combination characters (キャキュキョ, シャシュショ, チャチュチョ, etc.). Learn all 33 combined katakana sounds with romanization.",
+      "keywords": "katakana yoon, combined katakana, katakana combinations, キャキュキョ, シャシュショ, チャチュチョ, katakana digraphs, yoon katakana"
+    },
+    "katakanaForeign": {
+      "title": "Katakana Foreign Sounds (ファ-ウィ) - Extended Katakana | KanaDojo",
+      "titleShort": "Katakana Foreign Sounds",
+      "description": "Learn extended Katakana characters for foreign loanwords (ファ, フィ, ウィ, ウェ, etc.). Master special katakana combinations used in modern Japanese.",
+      "keywords": "katakana foreign sounds, extended katakana, katakana loanwords, ファフィ, ウィウェ, special katakana, modern katakana, foreign word katakana"
+    }
   }
 }
