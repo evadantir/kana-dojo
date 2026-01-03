@@ -1,12 +1,12 @@
 'use client';
-import { useState, useEffect, useMemo, useCallback, memo } from 'react';
+import { useState, useEffect, useMemo, useCallback, useRef, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import clsx from 'clsx';
 import { kana } from '@/features/Kana/data/kana';
 import useKanaStore from '@/features/Kana/store/useKanaStore';
-import { CircleCheck, CircleX } from 'lucide-react';
+import { CircleCheck, CircleX, CircleArrowRight } from 'lucide-react';
 import { Random } from 'random-js';
-import { useCorrect, useError } from '@/shared/hooks/useAudio';
+import { useCorrect, useError, useClick } from '@/shared/hooks/useAudio';
 import GameIntel from '@/shared/components/Game/GameIntel';
 import { getGlobalAdaptiveSelector } from '@/shared/lib/adaptiveSelection';
 import Stars from '@/shared/components/Game/Stars';
@@ -14,6 +14,7 @@ import { useCrazyModeTrigger } from '@/features/CrazyMode/hooks/useCrazyModeTrig
 import useStatsStore from '@/features/Progress/store/useStatsStore';
 import { useShallow } from 'zustand/react/shallow';
 import useStats from '@/shared/hooks/useStats';
+import { ActionButton } from '@/shared/components/ui/ActionButton';
 
 const random = new Random();
 const adaptiveSelector = getGlobalAdaptiveSelector();
@@ -42,7 +43,7 @@ interface TileProps {
   char: string;
   onClick: () => void;
   isDisabled?: boolean;
-  isBlank?: boolean; // For blank placeholder tiles
+  isBlank?: boolean;
 }
 
 // Memoized tile component for smooth animations
@@ -52,7 +53,7 @@ const Tile = memo(({ id, char, onClick, isDisabled, isBlank }: TileProps) => {
     return (
       <div
         className={clsx(
-          'relative flex items-center justify-center rounded-xl px-3 py-2 text-xl font-medium sm:px-4 sm:py-2.5 sm:text-2xl',
+          'relative flex items-center justify-center rounded-xl px-3 py-1.5 text-2xl font-medium sm:px-4 sm:py-2 sm:text-3xl',
           'border-b-4 border-transparent bg-[var(--border-color)]/30',
           'select-none'
         )}
@@ -69,7 +70,7 @@ const Tile = memo(({ id, char, onClick, isDisabled, isBlank }: TileProps) => {
       onClick={onClick}
       disabled={isDisabled}
       className={clsx(
-        'relative flex cursor-pointer items-center justify-center rounded-xl px-3 py-2 text-xl font-medium transition-colors sm:px-4 sm:py-2.5 sm:text-2xl',
+        'relative flex cursor-pointer items-center justify-center rounded-xl px-3 py-1.5 text-2xl font-medium transition-colors sm:px-4 sm:py-2 sm:text-3xl',
         'border-b-4 active:translate-y-[4px] active:border-b-0',
         'border-[var(--secondary-color-accent)] bg-[var(--secondary-color)] text-[var(--background-color)]',
         isDisabled && 'cursor-not-allowed opacity-50'
@@ -86,9 +87,12 @@ const Tile = memo(({ id, char, onClick, isDisabled, isBlank }: TileProps) => {
 
 Tile.displayName = 'Tile';
 
+// Bottom bar states
+type BottomBarState = 'check' | 'correct' | 'wrong';
+
 interface WordBuildingGameProps {
   isHidden: boolean;
-  isReverse: boolean; // true = romaji display, kana tiles; false = kana display, romaji tiles
+  isReverse: boolean;
   wordLength: number;
   onCorrect: (chars: string[]) => void;
   onWrong: () => void;
@@ -103,7 +107,9 @@ const WordBuildingGame = ({
 }: WordBuildingGameProps) => {
   const { playCorrect } = useCorrect();
   const { playErrorTwice } = useError();
+  const { playClick } = useClick();
   const { trigger: triggerCrazyMode } = useCrazyModeTrigger();
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const {
     score,
@@ -155,6 +161,7 @@ const WordBuildingGame = ({
     }, [kanaGroupIndices]);
 
   const [feedback, setFeedback] = useState(<>{'Build the word!'}</>);
+  const [bottomBarState, setBottomBarState] = useState<BottomBarState>('check');
 
   // Generate a word (array of characters) and distractors
   const generateWord = useCallback(() => {
@@ -163,7 +170,6 @@ const WordBuildingGame = ({
       return { wordChars: [], answerChars: [], allTiles: [] };
     }
 
-    // Select characters for the word using adaptive selection
     const wordChars: string[] = [];
     const usedChars = new Set<string>();
 
@@ -177,12 +183,10 @@ const WordBuildingGame = ({
       adaptiveSelector.markCharacterSeen(selected);
     }
 
-    // Get the answer characters (the tiles user needs to select)
     const answerChars = isReverse
       ? wordChars.map(r => romajiToKana[r])
       : wordChars.map(k => kanaToRomaji[k]);
 
-    // Generate distractor tiles (extra incorrect options)
     const distractorCount = Math.min(3, sourceChars.length - wordLength);
     const distractorSource = isReverse ? selectedKana : selectedRomaji;
     const distractors: string[] = [];
@@ -197,7 +201,6 @@ const WordBuildingGame = ({
       distractors.push(selected);
     }
 
-    // Combine and shuffle all tiles
     const allTiles = [...answerChars, ...distractors].sort(
       () => random.real(0, 1) - 0.5
     );
@@ -212,111 +215,109 @@ const WordBuildingGame = ({
     romajiToKana
   ]);
 
-  // Current word state
   const [wordData, setWordData] = useState(() => generateWord());
   const [placedTiles, setPlacedTiles] = useState<string[]>([]);
   const [isChecking, setIsChecking] = useState(false);
 
-  // Reset the game with a new word
   const resetGame = useCallback(() => {
     const newWord = generateWord();
     setWordData(newWord);
     setPlacedTiles([]);
     setIsChecking(false);
+    setBottomBarState('check');
     setFeedback(<>{'Build the word!'}</>);
   }, [generateWord]);
 
-  // Regenerate word when direction or length changes
   useEffect(() => {
     resetGame();
   }, [isReverse, wordLength, resetGame]);
 
-  // Check if answer is correct when all slots are filled
+  // Keyboard shortcut for Enter/Space to trigger button
   useEffect(() => {
-    if (
-      placedTiles.length === wordData.wordChars.length &&
-      wordData.wordChars.length > 0 &&
-      !isChecking
-    ) {
-      setIsChecking(true);
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (
+        ((event.ctrlKey || event.metaKey) && event.key === 'Enter') ||
+        event.code === 'Space' ||
+        event.key === ' '
+      ) {
+        buttonRef.current?.click();
+      }
+    };
 
-      // Check if placed tiles match the answer in order
-      const isCorrect = placedTiles.every(
-        (tile, i) => tile === wordData.answerChars[i]
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  // Handle Check button - validates the answer
+  const handleCheck = useCallback(() => {
+    if (placedTiles.length !== wordData.wordChars.length) return;
+
+    playClick();
+    setIsChecking(true);
+
+    const isCorrect = placedTiles.every(
+      (tile, i) => tile === wordData.answerChars[i]
+    );
+
+    if (isCorrect) {
+      playCorrect();
+      triggerCrazyMode();
+      resetWrongStreak();
+
+      wordData.wordChars.forEach(char => {
+        addCharacterToHistory(char);
+        incrementCharacterScore(char, 'correct');
+        adaptiveSelector.updateCharacterWeight(char, true);
+
+        if (isHiragana(char)) {
+          incrementHiraganaCorrect();
+        } else if (isKatakana(char)) {
+          incrementKatakanaCorrect();
+        }
+      });
+
+      incrementCorrectAnswers();
+      setScore(score + wordData.wordChars.length);
+      setBottomBarState('correct');
+
+      setFeedback(
+        <>
+          <span>
+            {wordData.wordChars.join('')} = {wordData.answerChars.join('')}
+          </span>
+          <CircleCheck className='ml-2 inline text-[var(--main-color)]' />
+        </>
+      );
+    } else {
+      playErrorTwice();
+      triggerCrazyMode();
+      incrementWrongStreak();
+      incrementWrongAnswers();
+
+      wordData.wordChars.forEach(char => {
+        incrementCharacterScore(char, 'wrong');
+        adaptiveSelector.updateCharacterWeight(char, false);
+      });
+
+      if (score - 1 >= 0) {
+        setScore(score - 1);
+      }
+
+      setBottomBarState('wrong');
+
+      setFeedback(
+        <>
+          <span>Correct: {wordData.answerChars.join('')}</span>
+          <CircleX className='ml-2 inline text-[var(--main-color)]' />
+        </>
       );
 
-      if (isCorrect) {
-        playCorrect();
-        triggerCrazyMode();
-        resetWrongStreak();
-
-        // Track stats for each character
-        wordData.wordChars.forEach(char => {
-          addCharacterToHistory(char);
-          incrementCharacterScore(char, 'correct');
-          adaptiveSelector.updateCharacterWeight(char, true);
-
-          // Track content-specific stats
-          if (isHiragana(char)) {
-            incrementHiraganaCorrect();
-          } else if (isKatakana(char)) {
-            incrementKatakanaCorrect();
-          }
-        });
-
-        incrementCorrectAnswers();
-        setScore(score + wordData.wordChars.length);
-
-        setFeedback(
-          <>
-            <span>
-              {wordData.wordChars.join('')} = {wordData.answerChars.join('')}
-            </span>
-            <CircleCheck className='ml-2 inline text-[var(--main-color)]' />
-          </>
-        );
-
-        // Notify parent and generate new word after delay
-        setTimeout(() => {
-          onCorrect(wordData.wordChars);
-          resetGame();
-        }, 800);
-      } else {
-        playErrorTwice();
-        triggerCrazyMode();
-        incrementWrongStreak();
-        incrementWrongAnswers();
-
-        // Track wrong for each character
-        wordData.wordChars.forEach(char => {
-          incrementCharacterScore(char, 'wrong');
-          adaptiveSelector.updateCharacterWeight(char, false);
-        });
-
-        if (score - 1 >= 0) {
-          setScore(score - 1);
-        }
-
-        setFeedback(
-          <>
-            <span>Wrong order! Try again</span>
-            <CircleX className='ml-2 inline text-[var(--main-color)]' />
-          </>
-        );
-
-        onWrong();
-
-        // Clear placed tiles after shake animation
-        setTimeout(() => {
-          setPlacedTiles([]);
-          setIsChecking(false);
-        }, 600);
-      }
+      onWrong();
     }
   }, [
     placedTiles,
     wordData,
-    isChecking,
+    playClick,
     playCorrect,
     playErrorTwice,
     triggerCrazyMode,
@@ -330,10 +331,17 @@ const WordBuildingGame = ({
     incrementWrongAnswers,
     score,
     setScore,
-    onCorrect,
-    onWrong,
-    resetGame
+    onWrong
   ]);
+
+  // Handle Continue button - goes to next word
+  const handleContinue = useCallback(() => {
+    playClick();
+    if (bottomBarState === 'correct') {
+      onCorrect(wordData.wordChars);
+    }
+    resetGame();
+  }, [playClick, bottomBarState, onCorrect, wordData.wordChars, resetGame]);
 
   // Handle tile click - either place or remove
   const handleTileClick = useCallback(
@@ -341,10 +349,8 @@ const WordBuildingGame = ({
       if (isChecking) return;
 
       if (placedTiles.includes(char)) {
-        // Remove from placed tiles (clicks on placed tile)
         setPlacedTiles(prev => prev.filter(c => c !== char));
       } else if (placedTiles.length < wordData.wordChars.length) {
-        // Add to placed tiles
         setPlacedTiles(prev => [...prev, char]);
       }
     },
@@ -355,6 +361,11 @@ const WordBuildingGame = ({
   if (selectedKana.length < wordLength || wordData.wordChars.length === 0) {
     return null;
   }
+
+  const canCheck =
+    placedTiles.length === wordData.wordChars.length && !isChecking;
+  const showContinue =
+    bottomBarState === 'correct' || bottomBarState === 'wrong';
 
   return (
     <div
@@ -379,7 +390,7 @@ const WordBuildingGame = ({
 
       {/* Answer Row Area - bordered section like Duolingo */}
       <div className='flex w-full flex-col items-center'>
-        <div className='flex h-24 w-full items-center border-t-2 border-b-2 border-[var(--border-color)] px-4 sm:w-1/2'>
+        <div className='flex h-[4.5rem] w-full items-center border-t-2 border-b-2 border-[var(--border-color)] px-4 sm:w-1/2'>
           <div className='flex flex-row flex-wrap justify-start gap-3'>
             <AnimatePresence mode='popLayout'>
               {placedTiles.map((char, index) => (
@@ -414,6 +425,43 @@ const WordBuildingGame = ({
       </div>
 
       <Stars />
+
+      {/* Bottom Bar - Check/Continue button like Duolingo */}
+      <div
+        className={clsx(
+          'fixed bottom-0 left-0 z-10 w-full px-4 py-4',
+          'border-t-2 border-[var(--border-color)]',
+          'flex items-center justify-center',
+          bottomBarState === 'correct' && 'bg-green-500/10',
+          bottomBarState === 'wrong' && 'bg-red-500/10',
+          bottomBarState === 'check' && 'bg-[var(--card-color)]'
+        )}
+      >
+        <div className='flex w-full flex-col items-center gap-3 md:w-1/2'>
+          {/* Feedback text for wrong answers */}
+          {bottomBarState === 'wrong' && (
+            <p className='text-lg font-medium text-red-500'>
+              Correct solution: {wordData.answerChars.join('')}
+            </p>
+          )}
+
+          <ActionButton
+            ref={buttonRef}
+            borderBottomThickness={8}
+            borderRadius='3xl'
+            className='w-full py-4 text-xl md:w-full'
+            onClick={showContinue ? handleContinue : handleCheck}
+            disabled={!canCheck && !showContinue}
+            colorScheme={bottomBarState === 'wrong' ? 'secondary' : 'main'}
+          >
+            <span>{showContinue ? 'continue' : 'check'}</span>
+            <CircleArrowRight />
+          </ActionButton>
+        </div>
+      </div>
+
+      {/* Spacer to prevent content being hidden behind fixed bottom bar */}
+      <div className='h-32' />
     </div>
   );
 };
