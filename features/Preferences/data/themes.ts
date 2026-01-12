@@ -254,7 +254,7 @@ const baseThemeSets: BaseThemeGroup[] = [
         secondaryColor: 'oklch(78.0% 0.130 250.0 / 1)' // cerulean blue
       },
       {
-        id: 'yumemizu',
+        id: 'yumemizu-deepdream',
         backgroundColor: 'oklch(20.5% 0.012 288.7 / 1)',
         mainColor: 'oklch(90.4% 0.216 274.7 / 1)',
         secondaryColor: 'oklch(92.6% 0.173 338.0 / 1)'
@@ -824,7 +824,7 @@ const baseThemeSets: BaseThemeGroup[] = [
         secondaryColor: 'oklch(91.0% 0.183 308.0 / 1)' // bright lavender
       },
       {
-        id: 'yumemizu',
+        id: 'yumemizu-starlight',
         backgroundColor: 'oklch(20.5% 0.042 220.0 / 1)', // deep dreamwater blue
         mainColor: 'oklch(92.0% 0.246 170.0 / 1)', // nebula teal-mint
         secondaryColor: 'oklch(90.0% 0.176 338.0 / 1)' // magical pale magenta
@@ -879,9 +879,9 @@ const baseThemeSets: BaseThemeGroup[] = [
       },
       {
         id: 'oboro',
-        backgroundColor: 'oklch(23.8% 0.041 270.0 / 1)',    // velvet graphite
-        mainColor: 'oklch(91.5% 0.212 120.0 / 1)',           // pear green
-        secondaryColor: 'oklch(80.0% 0.158 340.0 / 1)',      // smoky plum
+        backgroundColor: 'oklch(23.8% 0.041 270.0 / 1)', // velvet graphite
+        mainColor: 'oklch(91.5% 0.212 120.0 / 1)', // pear green
+        secondaryColor: 'oklch(80.0% 0.158 340.0 / 1)' // smoky plum
       },
       {
         id: 'hoshikuzu',
@@ -897,65 +897,58 @@ const baseThemeSets: BaseThemeGroup[] = [
       },
       {
         id: 'ameagari',
-        backgroundColor: 'oklch(18.7% 0.030 240.0 / 1)',   // slate mist
-        mainColor: 'oklch(93.0% 0.170 190.0 / 1)',          // dew-spun teal
-        secondaryColor: 'oklch(81.0% 0.144 260.0 / 1)',     // hydrangea blue
+        backgroundColor: 'oklch(18.7% 0.030 240.0 / 1)', // slate mist
+        mainColor: 'oklch(93.0% 0.170 190.0 / 1)', // dew-spun teal
+        secondaryColor: 'oklch(81.0% 0.144 260.0 / 1)' // hydrangea blue
       },
       {
         id: 'sakuraba',
-        backgroundColor: 'oklch(24.5% 0.044 150.0 / 1)',    // dappled willow green
-        mainColor: 'oklch(93.0% 0.210 340.0 / 1)',           // radiant sakura pink
-        secondaryColor: 'oklch(85.0% 0.148 262.0 / 1)',      // cool hyacinth blue
+        backgroundColor: 'oklch(24.5% 0.044 150.0 / 1)', // dappled willow green
+        mainColor: 'oklch(93.0% 0.210 340.0 / 1)', // radiant sakura pink
+        secondaryColor: 'oklch(85.0% 0.148 262.0 / 1)' // cool hyacinth blue
       },
       {
         id: 'suzu',
-        backgroundColor: 'oklch(14.2% 0.025 240.0 / 1)',    // midnight frosted slate
-        mainColor: 'oklch(98.0% 0.175 285.0 / 1)',           // radiant snow silver
-        secondaryColor: 'oklch(86.0% 0.120 210.0 / 1)',      // icy mist blue
+        backgroundColor: 'oklch(14.2% 0.025 240.0 / 1)', // midnight frosted slate
+        mainColor: 'oklch(98.0% 0.175 285.0 / 1)', // radiant snow silver
+        secondaryColor: 'oklch(86.0% 0.120 210.0 / 1)' // icy mist blue
       },
       {
         id: 'momiji-blaze',
-        backgroundColor: 'oklch(21.0% 0.042 30.0 / 1)',    // dusk brown-black
-        mainColor: 'oklch(82.0% 0.214 30.0 / 1)',           // maple red-orange
-        secondaryColor: 'oklch(85.0% 0.180 70.0 / 1)',      // persimmon gold
+        backgroundColor: 'oklch(21.0% 0.042 30.0 / 1)', // dusk brown-black
+        mainColor: 'oklch(82.0% 0.214 30.0 / 1)', // maple red-orange
+        secondaryColor: 'oklch(85.0% 0.180 70.0 / 1)' // persimmon gold
       },
       {
         id: 'kumo-no-asa',
-        backgroundColor: 'oklch(19.2% 0.026 230.0 / 1)',   // mist blue-gray
-        mainColor: 'oklch(95.0% 0.125 260.0 / 1)',          // soft cloud gray
-        secondaryColor: 'oklch(82.0% 0.129 300.0 / 1)',     // early sky lavender
+        backgroundColor: 'oklch(19.2% 0.026 230.0 / 1)', // mist blue-gray
+        mainColor: 'oklch(95.0% 0.125 260.0 / 1)', // soft cloud gray
+        secondaryColor: 'oklch(82.0% 0.129 300.0 / 1)' // early sky lavender
       },
       {
         id: 'miharashi',
-        backgroundColor: 'oklch(17.0% 0.032 215.0 / 1)',    // mountain shadow
-        mainColor: 'oklch(89.0% 0.135 145.0 / 1)',           // horizon sage green
-        secondaryColor: 'oklch(81.0% 0.125 220.0 / 1)',      // distant sky blue
+        backgroundColor: 'oklch(17.0% 0.032 215.0 / 1)', // mountain shadow
+        mainColor: 'oklch(89.0% 0.135 145.0 / 1)', // horizon sage green
+        secondaryColor: 'oklch(81.0% 0.125 220.0 / 1)' // distant sky blue
       },
       {
         id: 'yoru-no-mori',
-        backgroundColor: 'oklch(13.5% 0.035 55.0 / 1)',   // midnight bark
-        mainColor: 'oklch(78.0% 0.155 140.0 / 1)',         // moss green
-        secondaryColor: 'oklch(65.0% 0.110 190.0 / 1)',    // twilight leaf
+        backgroundColor: 'oklch(13.5% 0.035 55.0 / 1)', // midnight bark
+        mainColor: 'oklch(78.0% 0.155 140.0 / 1)', // moss green
+        secondaryColor: 'oklch(65.0% 0.110 190.0 / 1)' // twilight leaf
       },
       {
         id: 'akebono',
-        backgroundColor: 'oklch(18.0% 0.030 280.0 / 1)',   // shadowed indigo
-        mainColor: 'oklch(94.0% 0.160 25.0 / 1)',           // pale sunrise pink
-        secondaryColor: 'oklch(88.0% 0.140 305.0 / 1)',     // spring mist violet
+        backgroundColor: 'oklch(18.0% 0.030 280.0 / 1)', // shadowed indigo
+        mainColor: 'oklch(94.0% 0.160 25.0 / 1)', // pale sunrise pink
+        secondaryColor: 'oklch(88.0% 0.140 305.0 / 1)' // spring mist violet
       },
       {
         id: 'sango-midori',
-        backgroundColor: 'oklch(22.0% 0.045 145.0 / 1)',   // reef dusk
-        mainColor: 'oklch(90.0% 0.208 150.0 / 1)',          // coral green
-        secondaryColor: 'oklch(82.0% 0.160 185.0 / 1)',     // lagoon teal
-      },
-      {
-        id: 'yoru-no-mori',
-        backgroundColor: 'oklch(13.5% 0.035 55.0 / 1)',   // midnight bark
-        mainColor: 'oklch(78.0% 0.155 140.0 / 1)',         // moss green
-        secondaryColor: 'oklch(65.0% 0.110 190.0 / 1)',    // twilight leaf
-      },
-
+        backgroundColor: 'oklch(22.0% 0.045 145.0 / 1)', // reef dusk
+        mainColor: 'oklch(90.0% 0.208 150.0 / 1)', // coral green
+        secondaryColor: 'oklch(82.0% 0.160 185.0 / 1)' // lagoon teal
+      }
     ]
   },
   {
@@ -1012,9 +1005,9 @@ const baseThemeSets: BaseThemeGroup[] = [
       },
       {
         id: 'kuroyuri',
-        backgroundColor: 'oklch(23.8% 0.041 270.0 / 1)',    // velvet graphite
-        mainColor: 'oklch(91.5% 0.212 120.0 / 1)',           // pear green
-        secondaryColor: 'oklch(80.0% 0.158 340.0 / 1)'      // smoky plum
+        backgroundColor: 'oklch(23.8% 0.041 270.0 / 1)', // velvet graphite
+        mainColor: 'oklch(91.5% 0.212 120.0 / 1)', // pear green
+        secondaryColor: 'oklch(80.0% 0.158 340.0 / 1)' // smoky plum
       }
     ]
   }
