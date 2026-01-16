@@ -164,7 +164,10 @@ const MobileBottomBar = () => {
       </div>
 
       <div className='flex items-center gap-2 text-xs text-[var(--secondary-color)]'>
-        <span className='hidden text-xs text-[var(--secondary-color)] lg:inline-block'>
+        <span
+          className='hidden text-xs text-[var(--secondary-color)] hover:cursor-pointer hover:text-[var(--main-color)] lg:inline-block'
+          onClick={() => handleClick('https://ko-fi.com/kanadojo')}
+        >
           made with ❤️ by the community
         </span>
         <span className='hidden text-sm text-[var(--secondary-color)] select-none lg:inline-block'>
