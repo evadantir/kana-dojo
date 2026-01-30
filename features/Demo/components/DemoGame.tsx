@@ -41,20 +41,21 @@ const SHOW_STATS_LINE = true;
 // These characters are chosen for visual simplicity and distinctiveness
 
 // Simple Kana: 10 visually distinct, simple hiragana
-const DEMO_KANA = [
-  { kana: 'あ', romaji: 'a' },
-  { kana: 'い', romaji: 'i' },
-  { kana: 'う', romaji: 'u' },
-  { kana: 'え', romaji: 'e' },
-  { kana: 'お', romaji: 'o' },
-  { kana: 'か', romaji: 'ka' },
-  { kana: 'き', romaji: 'ki' },
-  { kana: 'く', romaji: 'ku' },
-  { kana: 'し', romaji: 'shi' },
-  { kana: 'た', romaji: 'ta' },
-];
+// TEMPORARILY DISABLED - focusing on kanji only
+// const DEMO_KANA = [
+//   { kana: 'あ', romaji: 'a' },
+//   { kana: 'い', romaji: 'i' },
+//   { kana: 'う', romaji: 'u' },
+//   { kana: 'え', romaji: 'e' },
+//   { kana: 'お', romaji: 'o' },
+//   { kana: 'か', romaji: 'ka' },
+//   { kana: 'き', romaji: 'ki' },
+//   { kana: 'く', romaji: 'ku' },
+//   { kana: 'し', romaji: 'shi' },
+//   { kana: 'た', romaji: 'ta' },
+// ];
 
-// Simple Kanji: 10 visually simple, high-frequency kanji with clear meanings
+// Simple Kanji: 21 visually simple, high-frequency kanji with clear meanings and minimal strokes
 const DEMO_KANJI = [
   { kanji: '一', meaning: 'one', reading: 'ichi' },
   { kanji: '二', meaning: 'two', reading: 'ni' },
@@ -67,6 +68,17 @@ const DEMO_KANJI = [
   { kanji: '月', meaning: 'moon', reading: 'tsuki' },
   { kanji: '木', meaning: 'tree', reading: 'ki' },
   { kanji: '口', meaning: 'mouth', reading: 'kuchi' },
+  // 10 additional super simple kanji (1-4 strokes)
+  { kanji: '人', meaning: 'person', reading: 'hito' },
+  { kanji: '入', meaning: 'enter', reading: 'iru' },
+  { kanji: '上', meaning: 'up', reading: 'ue' },
+  { kanji: '下', meaning: 'down', reading: 'shita' },
+  { kanji: '八', meaning: 'eight', reading: 'hachi' },
+  { kanji: '十', meaning: 'ten', reading: 'jū' },
+  { kanji: '九', meaning: 'nine', reading: 'kyū' },
+  { kanji: '七', meaning: 'seven', reading: 'nana' },
+  { kanji: '六', meaning: 'six', reading: 'roku' },
+  { kanji: '五', meaning: 'five', reading: 'go' },
 ];
 
 // Simple Vocabulary: 10 easy, practical Japanese words
@@ -393,8 +405,8 @@ const DemoGame = () => {
   const [isCelebrating, setIsCelebrating] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState<Question | null>(null);
 
-  // Question type order: kana -> kanji -> kana -> ...
-  const questionTypes: QuestionType[] = ['kana', 'kanji']; // 'vocab' commented out
+  // Question type order: kanji only (kana temporarily disabled)
+  const questionTypes: QuestionType[] = ['kanji']; // 'kana' and 'vocab' commented out
 
   // Generate a question based on the current type
   const generateQuestion = useCallback((type: QuestionType): Question => {
@@ -435,7 +447,7 @@ const DemoGame = () => {
 
   // Reset game with new question
   const resetGame = useCallback(() => {
-    const currentType = questionTypes[questionIndex % 2]; // % 2 since we only have kana and kanji
+    const currentType = questionTypes[0]; // Always use kanji since kana is disabled
     const newQuestion = generateQuestion(currentType);
     setCurrentQuestion(newQuestion);
     setPlacedTiles([]);
