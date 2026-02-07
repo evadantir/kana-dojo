@@ -2,7 +2,10 @@
 
 import React from 'react';
 import { cn } from '@/shared/lib/utils';
-import { formatLastUpdated, getFreshnessBadge } from '@/shared/lib/content-freshness';
+import {
+  formatLastUpdated,
+  getFreshnessBadge,
+} from '@/shared/lib/content-freshness';
 import type {
   BlogPost as BlogPostType,
   BlogPostMeta,
@@ -127,7 +130,7 @@ export function BlogPost({
                     const badge = getFreshnessBadge(post.updatedAt);
                     if (badge.variant === 'fresh') {
                       return (
-                        <span className='rounded-full bg-emerald-500/15 px-2 py-0.5 text-[9px] font-bold normal-case text-emerald-500'>
+                        <span className='rounded-full bg-emerald-500/15 px-2 py-0.5 text-[9px] font-bold text-emerald-500 normal-case'>
                           {badge.label}
                         </span>
                       );

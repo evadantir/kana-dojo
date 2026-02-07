@@ -65,12 +65,16 @@ interface CheckResult {
 const results: CheckResult[] = [];
 
 function log(result: CheckResult) {
-  const icon = result.status === 'pass' ? '✅' : result.status === 'warn' ? '⚠️' : '❌';
+  const icon =
+    result.status === 'pass' ? '✅' : result.status === 'warn' ? '⚠️' : '❌';
   console.log(`${icon} [${result.page}] ${result.message}`);
   results.push(result);
 }
 
-async function checkPageStatus(locale: string, path: string): Promise<number | null> {
+async function checkPageStatus(
+  locale: string,
+  path: string,
+): Promise<number | null> {
   const url = `${BASE_URL}/${locale}${path}`;
   try {
     const response = await fetch(url, { method: 'HEAD', redirect: 'follow' });
@@ -98,20 +102,37 @@ async function checkMetaTags(locale: string, path: string): Promise<void> {
     if (!titleMatch || !titleMatch[1] || titleMatch[1].length < 10) {
       log({ page, status: 'fail', message: 'Missing or too short <title>' });
     } else if (titleMatch[1].length > 70) {
-      log({ page, status: 'warn', message: `Title too long (${titleMatch[1].length} chars): ${titleMatch[1]}` });
+      log({
+        page,
+        status: 'warn',
+        message: `Title too long (${titleMatch[1].length} chars): ${titleMatch[1]}`,
+      });
     } else {
       log({ page, status: 'pass', message: `Title OK: "${titleMatch[1]}"` });
     }
 
     // Check meta description
-    const descMatch = html.match(/<meta\s+name="description"\s+content="([^"]*?)"/i)
-      || html.match(/<meta\s+content="([^"]*?)"\s+name="description"/i);
+    const descMatch =
+      html.match(/<meta\s+name="description"\s+content="([^"]*?)"/i) ||
+      html.match(/<meta\s+content="([^"]*?)"\s+name="description"/i);
     if (!descMatch || !descMatch[1] || descMatch[1].length < 50) {
-      log({ page, status: 'fail', message: 'Missing or too short meta description' });
+      log({
+        page,
+        status: 'fail',
+        message: 'Missing or too short meta description',
+      });
     } else if (descMatch[1].length > 160) {
-      log({ page, status: 'warn', message: `Description too long (${descMatch[1].length} chars)` });
+      log({
+        page,
+        status: 'warn',
+        message: `Description too long (${descMatch[1].length} chars)`,
+      });
     } else {
-      log({ page, status: 'pass', message: `Description OK (${descMatch[1].length} chars)` });
+      log({
+        page,
+        status: 'pass',
+        message: `Description OK (${descMatch[1].length} chars)`,
+      });
     }
 
     // Check Open Graph tags
@@ -119,24 +140,39 @@ async function checkMetaTags(locale: string, path: string): Promise<void> {
     const ogDesc = html.includes('og:description');
     const ogImage = html.includes('og:image');
     if (!ogTitle || !ogDesc) {
-      log({ page, status: 'warn', message: `Missing OG tags: ${!ogTitle ? 'og:title' : ''} ${!ogDesc ? 'og:description' : ''}` });
+      log({
+        page,
+        status: 'warn',
+        message: `Missing OG tags: ${!ogTitle ? 'og:title' : ''} ${!ogDesc ? 'og:description' : ''}`,
+      });
     }
     if (!ogImage) {
       log({ page, status: 'warn', message: 'Missing og:image' });
     }
 
     // Check canonical URL
-    const canonical = html.includes('rel="canonical"') || html.includes("rel='canonical'");
+    const canonical =
+      html.includes('rel="canonical"') || html.includes("rel='canonical'");
     if (!canonical) {
       log({ page, status: 'warn', message: 'Missing canonical URL' });
     }
 
     // Check structured data
-    const jsonLdMatches = html.match(/<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi);
+    const jsonLdMatches = html.match(
+      /<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi,
+    );
     if (!jsonLdMatches || jsonLdMatches.length === 0) {
-      log({ page, status: 'warn', message: 'No JSON-LD structured data found' });
+      log({
+        page,
+        status: 'warn',
+        message: 'No JSON-LD structured data found',
+      });
     } else {
-      log({ page, status: 'pass', message: `${jsonLdMatches.length} JSON-LD schema(s) found` });
+      log({
+        page,
+        status: 'pass',
+        message: `${jsonLdMatches.length} JSON-LD schema(s) found`,
+      });
 
       // Check for expected schemas
       const expectedSchemas = SCHEMA_EXPECTATIONS[path];
@@ -144,20 +180,34 @@ async function checkMetaTags(locale: string, path: string): Promise<void> {
         const allJsonLd = jsonLdMatches.join(' ');
         for (const schema of expectedSchemas) {
           if (!allJsonLd.includes(schema)) {
-            log({ page, status: 'warn', message: `Expected schema "${schema}" not found` });
+            log({
+              page,
+              status: 'warn',
+              message: `Expected schema "${schema}" not found`,
+            });
           }
         }
       }
     }
 
     // Check hreflang tags
-    const hreflangEn = html.includes('hreflang="en"') || html.includes("hreflang='en'");
-    const hreflangEs = html.includes('hreflang="es"') || html.includes("hreflang='es'");
+    const hreflangEn =
+      html.includes('hreflang="en"') || html.includes("hreflang='en'");
+    const hreflangEs =
+      html.includes('hreflang="es"') || html.includes("hreflang='es'");
     if (!hreflangEn || !hreflangEs) {
-      log({ page, status: 'warn', message: 'Missing hreflang tags for all locales' });
+      log({
+        page,
+        status: 'warn',
+        message: 'Missing hreflang tags for all locales',
+      });
     }
   } catch (error) {
-    log({ page, status: 'fail', message: `Fetch error: ${error instanceof Error ? error.message : 'Unknown'}` });
+    log({
+      page,
+      status: 'fail',
+      message: `Fetch error: ${error instanceof Error ? error.message : 'Unknown'}`,
+    });
   }
 }
 
@@ -166,12 +216,24 @@ async function checkIndexNow(): Promise<void> {
     const response = await fetch(`${BASE_URL}/api/indexnow`);
     const data = await response.json();
     if (data.configured) {
-      log({ page: 'IndexNow', status: 'pass', message: 'IndexNow API configured' });
+      log({
+        page: 'IndexNow',
+        status: 'pass',
+        message: 'IndexNow API configured',
+      });
     } else {
-      log({ page: 'IndexNow', status: 'fail', message: 'IndexNow API key not configured (set INDEXNOW_KEY env var)' });
+      log({
+        page: 'IndexNow',
+        status: 'fail',
+        message: 'IndexNow API key not configured (set INDEXNOW_KEY env var)',
+      });
     }
   } catch {
-    log({ page: 'IndexNow', status: 'fail', message: 'IndexNow API endpoint unreachable' });
+    log({
+      page: 'IndexNow',
+      status: 'fail',
+      message: 'IndexNow API endpoint unreachable',
+    });
   }
 }
 
@@ -181,12 +243,24 @@ async function checkSitemap(): Promise<void> {
     if (response.ok) {
       const xml = await response.text();
       const urlCount = (xml.match(/<url>/g) || []).length;
-      log({ page: 'Sitemap', status: 'pass', message: `sitemap.xml accessible with ${urlCount} URLs` });
+      log({
+        page: 'Sitemap',
+        status: 'pass',
+        message: `sitemap.xml accessible with ${urlCount} URLs`,
+      });
     } else {
-      log({ page: 'Sitemap', status: 'fail', message: `sitemap.xml returned HTTP ${response.status}` });
+      log({
+        page: 'Sitemap',
+        status: 'fail',
+        message: `sitemap.xml returned HTTP ${response.status}`,
+      });
     }
   } catch {
-    log({ page: 'Sitemap', status: 'fail', message: 'sitemap.xml unreachable' });
+    log({
+      page: 'Sitemap',
+      status: 'fail',
+      message: 'sitemap.xml unreachable',
+    });
   }
 }
 
@@ -197,12 +271,24 @@ async function checkRobotsTxt(): Promise<void> {
       const text = await response.text();
       const hasSitemap = text.includes('Sitemap:');
       const hasAIBots = text.includes('GPTBot') || text.includes('Claude-Web');
-      log({ page: 'robots.txt', status: 'pass', message: `robots.txt accessible${hasSitemap ? ', has sitemap' : ', MISSING sitemap ref'}${hasAIBots ? ', AI bots configured' : ''}` });
+      log({
+        page: 'robots.txt',
+        status: 'pass',
+        message: `robots.txt accessible${hasSitemap ? ', has sitemap' : ', MISSING sitemap ref'}${hasAIBots ? ', AI bots configured' : ''}`,
+      });
     } else {
-      log({ page: 'robots.txt', status: 'fail', message: `robots.txt returned HTTP ${response.status}` });
+      log({
+        page: 'robots.txt',
+        status: 'fail',
+        message: `robots.txt returned HTTP ${response.status}`,
+      });
     }
   } catch {
-    log({ page: 'robots.txt', status: 'fail', message: 'robots.txt unreachable' });
+    log({
+      page: 'robots.txt',
+      status: 'fail',
+      message: 'robots.txt unreachable',
+    });
   }
 }
 
@@ -212,9 +298,17 @@ async function checkLlmsTxt(): Promise<void> {
     if (response.ok) {
       const text = await response.text();
       const sections = (text.match(/^## /gm) || []).length;
-      log({ page: 'llms.txt', status: 'pass', message: `llms.txt accessible with ${sections} sections (GEO ready)` });
+      log({
+        page: 'llms.txt',
+        status: 'pass',
+        message: `llms.txt accessible with ${sections} sections (GEO ready)`,
+      });
     } else {
-      log({ page: 'llms.txt', status: 'warn', message: `llms.txt returned HTTP ${response.status}` });
+      log({
+        page: 'llms.txt',
+        status: 'warn',
+        message: `llms.txt returned HTTP ${response.status}`,
+      });
     }
   } catch {
     log({ page: 'llms.txt', status: 'warn', message: 'llms.txt unreachable' });

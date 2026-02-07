@@ -6,7 +6,7 @@ KanaDojo has strong SEO foundations with Phase 1-3 implementations complete, but
 
 1. **Complete IndexNow instant indexing setup** — Generate UUID key, create [public/[uuid].txt](public), add `INDEXNOW_KEY` to Vercel environment variables, submit to Bing Webmaster Tools, then integrate [api/submit-indexnow/route.ts](app/api/submit-indexnow/route.ts) into content publishing workflow (especially blog posts and resources updates)
 
-2. **Deploy unused structured data schemas** — Add `HowToSchema` from [shared/lib/seo/structuredData.tsx](shared/lib/seo/structuredData.tsx) to step-by-step blog guides, apply `LearningResourceSchema` to [kana/page.tsx](app/[locale]/(main)/kana/page.tsx), [kanji/page.tsx](app/[locale]/(main)/kanji/page.tsx), [vocabulary/page.tsx](app/[locale]/(main)/vocabulary/page.tsx), and integrate `CourseSchema` into main learning sections for enhanced rich results
+2. **Deploy unused structured data schemas** — Add `HowToSchema` from [shared/lib/seo/structuredData.tsx](shared/lib/seo/structuredData.tsx) to step-by-step blog guides, apply `LearningResourceSchema` to [kana/page.tsx](<app/[locale]/(main)/kana/page.tsx>), [kanji/page.tsx](<app/[locale]/(main)/kanji/page.tsx>), [vocabulary/page.tsx](<app/[locale]/(main)/vocabulary/page.tsx>), and integrate `CourseSchema` into main learning sections for enhanced rich results
 
 3. **Audit and expand breadcrumbs** — Verify `BreadcrumbList` schema from [Breadcrumbs.tsx](shared/components/Breadcrumbs.tsx) appears on all feature pages (not just blog/resources), add to Kana Blitz, Kanji Blitz, Vocabulary training, and achievements pages for improved navigation signals
 
@@ -26,7 +26,7 @@ KanaDojo has strong SEO foundations with Phase 1-3 implementations complete, but
 
 1. **Locale strategy** — Sitemap includes `ja` but [config.ts](core/i18n/config.ts) only shows `en`/`es`. Decision needed: Remove `ja` from sitemap or activate Japanese locale with full translations?
 
-2. **Video content preparation** — `VideoSchema` is implemented but unused. Planning to add video tutorials? If yes, when should schema be deployed to [Academy pages](app/[locale]/(main)/academy)?
+2. **Video content preparation** — `VideoSchema` is implemented but unused. Planning to add video tutorials? If yes, when should schema be deployed to [Academy pages](<app/[locale]/(main)/academy>)?
 
 3. **Performance vs SEO tradeoffs** — Font loading optimization skips 35+ Google Fonts in dev. Any performance concerns for production that might affect SEO? Consider subset loading or variable fonts.
 

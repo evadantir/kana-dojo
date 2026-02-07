@@ -3,7 +3,10 @@
 import React from 'react';
 import { Link } from '@/shared/components/navigation/Link';
 import { cn } from '@/shared/lib/utils';
-import { formatLastUpdated, getFreshnessBadge } from '@/shared/lib/content-freshness';
+import {
+  formatLastUpdated,
+  getFreshnessBadge,
+} from '@/shared/lib/content-freshness';
 import type { BlogPostMeta, Category } from '../types/blog';
 
 /**
